@@ -3,16 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Random Background & 3D Animation</title>
+    <title>Random Background</title>
     <style>
         body {
             margin: 0;
             padding: 0;
-            background-repeat: no-repeat;
+            background-repeat: repeat; /* Slike će se ponavljati */
             background-position: center;
-            background-size: cover; /* Održava proporcije slika i popunjava ekran */
             height: 100vh;
-            transition: background-image 2s ease-in-out, background-color 1s ease-in-out, opacity 2s ease-in-out, transform 2s ease-in-out;
+            transition: background-image 2s ease-in-out;
         }
 
         #animation {
@@ -30,6 +29,7 @@
     <div id="animation">*❤SISI❤*</div>
 
     <script>
+        // Dodavanje slika iz foldera SLIKEXAT 
         const backgrounds = [
             'SLIKEXAT/slika1.gif',
             'SLIKEXAT/slika2.jpg',
@@ -42,36 +42,17 @@
         ];
         
         let backgroundIndex = 0;
-        const transitions = [
-            'ease-in-out', 'linear', 'ease', 'cubic-bezier(0.25, 1, 0.5, 1)', 'ease-in', 'ease-out',
-            'ease-in-out-cubic', 'ease-in-out-quint', 'step-start', 'step-end', 'initial', 'inherit'
-        ];
         
+        // Funkcija za promenu pozadine
         function changeBackground() {
-            const transitionType = transitions[Math.floor(Math.random() * transitions.length)];
-            document.body.style.transition = `background-image 2s ${transitionType}, opacity 2s ${transitionType}, transform 2s ${transitionType}`;
             document.body.style.backgroundImage = `url('${backgrounds[backgroundIndex]}')`;
             backgroundIndex = (backgroundIndex + 1) % backgrounds.length;
         }
 
-        function startAnimation() {
-            const animationElement = document.getElementById('animation');
-            animationElement.style.visibility = 'visible';
-            animationElement.style.opacity = 1;
-            // Removed animation part for clearer view as you requested earlier
-
-            setTimeout(() => {
-                animationElement.style.visibility = 'hidden';
-                animationElement.style.opacity = 0;
-            }, 60000); // Animacija traje 1 minut
-        }
-
-        // Pozadina menja svakih 5 minuta (300000 ms)
+        // Prva promjena pozadine odmah
         changeBackground();
-        setInterval(changeBackground, 180000); // Menjanje pozadine svakih 3 minuta
-
-        // Animacija slova počinje svakih 3 minuta (180000 ms)
-        setInterval(startAnimation, 180000); // Pokretanje animacije svakih 3 minuta
+        // Menjanje pozadine svakih 3 minuta (180000 ms)
+        setInterval(changeBackground, 180000);
     </script>
 
 </body>
