@@ -17,30 +17,35 @@
 
         #animation {
             position: fixed;
-            bottom: 150px;
-            right: 150px;
             font-family: 'Courier New', Courier, monospace;
             font-size: 2rem;
             color: blue; /* Bela neon boja */
             text-shadow: 0 0 10px #ffffff, 0 0 20px #ffffff, 0 0 30px #ffffff, 0 0 40px #ffffff, 0 0 50px #ffffff;
             visibility: visible;
             opacity: 1;
-            transform: translateZ(0);
-            animation: moveUpDown 60s linear infinite, rotateXY 60s linear infinite; /* Animacije koje traju 1 minut (60s) */
+            animation: moveInCorners 10s linear infinite, rotateXYZ 60s linear infinite; /* Animacije koje traju 10s (kretanje) i 60s (rotacija) */
         }
 
-        @keyframes moveUpDown {
+        @keyframes moveInCorners {
             0% {
-                bottom: 150px;
-                transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg); /* Početak animacije */
+                top: 0;
+                left: 0;
+            }
+            25% {
+                top: 0;
+                right: 0;
             }
             50% {
-                bottom: 100px;
-                transform: rotateX(180deg) rotateY(180deg) rotateZ(180deg); /* Rotacija i pomeranje prema vrhu */
+                bottom: 0;
+                right: 0;
+            }
+            75% {
+                bottom: 0;
+                left: 0;
             }
             100% {
-                bottom: 150px;
-                transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg); /* Pomeranje nazad do početne pozicije */
+                top: 0;
+                left: 0;
             }
         }
 
@@ -62,7 +67,6 @@
         const backgrounds = [
             'https://i.imgur.com/u3lpWJh.gif',
              'https://i.imgur.com/uGu79bPl.jpg'
-          
         ];
         
         let backgroundIndex = 0;
@@ -82,7 +86,7 @@
             const animationElement = document.getElementById('animation');
             animationElement.style.visibility = 'visible';
             animationElement.style.opacity = 1;
-            animationElement.style.animation = 'moveUpDown 60s linear infinite, rotateXYZ 60s linear infinite'; // Animacija traje 1 minut
+            animationElement.style.animation = 'moveInCorners 10s linear infinite, rotateXYZ 60s linear infinite'; 
 
             setTimeout(() => {
                 animationElement.style.visibility = 'hidden';
@@ -96,10 +100,8 @@
 
         // Animacija slova počinje svakih 3 minuta (180000 ms)
         setInterval(startAnimation, 180000); // Pokretanje animacije svakih 3 minuta
-<script src="http://scripts.myradiostream.com/s23/20112/song.js"></script>
-    <script src="http://scripts.myradiostream.com/s23/20112/listeners.js"></script>
-    <script src="http://scripts.myradiostream.com/s23/20112/status.js"></script>
-        
+
+        // Ukloni nepotrebne skripte ako nisu potrebne
     </script>
 
 </body>
