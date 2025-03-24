@@ -3,105 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Random Background & 3D Animation</title>
+    <title>Random Background</title>
     <style>
         body {
             margin: 0;
             padding: 0;
-            background-repeat: repeat;
-            background-position: top left;
-            background-size: auto;
+            background-repeat: repeat; /* Slike se neće ponavljati */
+            background-position: center;
+            background-size: cover; /* Slika će pokriti celu pozadinu */
             height: 100vh;
-            transition: background-image 2s ease-in-out, background-color 1s ease-in-out, opacity 2s ease-in-out, transform 2s ease-in-out;
+            transition: background-image 2s ease-in-out;
         }
-
-        #animation {
-            position: fixed;
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 2rem;
-            color: blue; /* Bela neon boja */
-            text-shadow: 0 0 10px #ffffff, 0 0 20px #ffffff, 0 0 30px #ffffff, 0 0 40px #ffffff, 0 0 50px #ffffff;
-            visibility: visible;
-            opacity: 1;
-            animation: moveInCorners 10s linear infinite, rotateXYZ 60s linear infinite; /* Animacije koje traju 10s (kretanje) i 60s (rotacija) */
-        }
-
-        @keyframes moveInCorners {
-            0% {
-                top: 0;
-                left: 0;
-            }
-            25% {
-                top: 0;
-                right: 0;
-            }
-            50% {
-                bottom: 0;
-                right: 0;
-            }
-            75% {
-                bottom: 0;
-                left: 0;
-            }
-            100% {
-                top: 0;
-                left: 0;
-            }
-        }
-
-        @keyframes rotateXYZ {
-            0% { transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg); }
-            25% { transform: rotateX(90deg) rotateY(0deg) rotateZ(0deg); }
-            50% { transform: rotateX(180deg) rotateY(90deg) rotateZ(0deg); }
-            75% { transform: rotateX(270deg) rotateY(180deg) rotateZ(90deg); }
-            100% { transform: rotateX(360deg) rotateY(360deg) rotateZ(180deg); }
-        }
-
     </style>
 </head>
 <body>
 
-    <div id="animation">*❤SISI❤*</div>
-
     <script>
+        // Dodajete slike iz foldera SLIKEXAT
         const backgrounds = [
-            'https://i.imgur.com/u3lpWJh.gif',
-             'https://i.imgur.com/uGu79bPl.jpg'
+            'SLIKEXAT/slika1.gif',
+            'SLIKEXAT/slika2.jpg',
+            'SLIKEXAT/slika3.jpg',
+            'SLIKEXAT/slika4.jpg',
+            'SLIKEXAT/slika5.jpg',
+            'SLIKEXAT/slika6.jpg',
+            'SLIKEXAT/slika7.jpg',
+            'SLIKEXAT/slika8.jpg'
         ];
         
         let backgroundIndex = 0;
-        const transitions = [
-            'ease-in-out', 'linear', 'ease', 'cubic-bezier(0.25, 1, 0.5, 1)', 'ease-in', 'ease-out',
-            'ease-in-out-cubic', 'ease-in-out-quint', 'step-start', 'step-end', 'initial', 'inherit'
-        ];
         
+        // Funkcija za promenu pozadine
         function changeBackground() {
-            const transitionType = transitions[Math.floor(Math.random() * transitions.length)];
-            document.body.style.transition = `background-image 2s ${transitionType}, opacity 2s ${transitionType}, transform 2s ${transitionType}`;
             document.body.style.backgroundImage = `url('${backgrounds[backgroundIndex]}')`;
             backgroundIndex = (backgroundIndex + 1) % backgrounds.length;
         }
 
-        function startAnimation() {
-            const animationElement = document.getElementById('animation');
-            animationElement.style.visibility = 'visible';
-            animationElement.style.opacity = 1;
-            animationElement.style.animation = 'moveInCorners 10s linear infinite, rotateXYZ 60s linear infinite'; 
-
-            setTimeout(() => {
-                animationElement.style.visibility = 'hidden';
-                animationElement.style.opacity = 0;
-            }, 60000); // Animacija traje 1 minut
-        }
-
-        // Pozadina menja svakih 5 minuta (300000 ms)
+        // Prva promjena pozadine odmah
         changeBackground();
-        setInterval(changeBackground, 50000); // Menjanje pozadine svakih 5 minuta
-
-        // Animacija slova počinje svakih 3 minuta (180000 ms)
-        setInterval(startAnimation, 180000); // Pokretanje animacije svakih 3 minuta
-
-        // Ukloni nepotrebne skripte ako nisu potrebne
+        // Menjanje pozadine svakih 3 minuta (180000 ms)
+        setInterval(changeBackground, 180000);
     </script>
 
 </body>
