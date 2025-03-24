@@ -8,18 +8,17 @@
         body {
             margin: 0;
             padding: 0;
-            background-repeat: repeat; /* Slike će se ponavljati */
-            background-position: center;
             height: 100vh;
+            background-color: #f0f0f0; /* Boja pozadine koja će se uklopiti */
             transition: background-image 2s ease-in-out;
         }
 
-      </style>
+      
+    </style>
 </head>
 <body>
 
-      <script>
-        // Dodavanje slika iz foldera SLIKEXAT 
+     <script>
         const backgrounds = [
             'SLIKEXAT/slika1.gif',
             'SLIKEXAT/slika2.jpg',
@@ -32,11 +31,30 @@
         ];
         
         let backgroundIndex = 0;
-        
+
         // Funkcija za promenu pozadine
         function changeBackground() {
-            document.body.style.backgroundImage = `url('${backgrounds[backgroundIndex]}')`;
-            backgroundIndex = (backgroundIndex + 1) % backgrounds.length;
+            const imageUrl = backgrounds[backgroundIndex];
+            const img = new Image();
+            img.src = imageUrl;
+
+            img.onload = function() {
+                const imgWidth = img.width;
+                const imgHeight = img.height;
+                const bodyWidth = window.innerWidth;
+                const bodyHeight = window.innerHeight;
+
+                // Izračunavanje ponavljanja pozadine
+                const repeatX = Math.ceil(bodyWidth / imgWidth);
+                const repeatY = Math.ceil(bodyHeight / imgHeight);
+                
+                // Postavljanje slike kao pozadine
+                document.body.style.backgroundImage = `url('${imageUrl}')`;
+                document.body.style.backgroundSize = `${imgWidth}px ${imgHeight}px`; // Održava proporcije slika
+                document.body.style.backgroundRepeat = `${repeatX} ${repeatY}`; // Ponavljanje
+            };
+
+            backgroundIndex = (backgroundIndex + 1) % backgrounds.length; // Promena indeksa za sledeću sliku
         }
 
         // Prva promjena pozadine odmah
